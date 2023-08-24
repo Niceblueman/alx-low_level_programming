@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-
 def island_perimeter(grid):
+    """Return the perimiter of an island in return.
+    """
     width = len(grid[0])
     height = len(grid)
     edges = 0

@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 def island_perimeter(grid):
-    """Return the perimiter of an island in return.
+
+    grid is a list of list of integers:
+    0 represents a water zone
+    1 represents a land zone
+    One cell is a square with side length 1
     """
     width = len(grid[0])
     height = len(grid)

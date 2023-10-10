@@ -2,7 +2,7 @@
 
 
 /**
- *_binary_search - searches for a value in a sorted array of integers
+ *my_binary_search - searches for a value in a sorted array of integers
  *for a value in a sorted array of integers
  *@array: pointer to the first element of the array to search in
  *@left: number of elements in array left

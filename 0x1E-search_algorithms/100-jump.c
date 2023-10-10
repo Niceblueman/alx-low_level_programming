@@ -1,36 +1,43 @@
+#include <stdio.h>
+#include <math.h>
 #include "search_algos.h"
 
 /**
- * jmp_search - function that searches for a value
- *
- * @array: a pointer to the first element of the array to search in
- * @size:  the number of elements in array
- * @value: is the value to search for
- * Return: the first index where value is located
+ * jump_search - Search for a value in a sorted array using Jump search.
+ * @array: Pointer to the first element of the array.
+ * @size: Number of elements in the array.
+ * @value: Value to search for.
+ * Return: First index where value is located, or -1 if not found.
  */
 
-int jmp_search(int *array, size_t size, int value)
+int jump_search(int *array, size_t size, int value)
 {
-	size_t i, step, jmp;
+	size_t step = sqrt(size);
+	size_t prev = 0;
 
-	if (array == NULL || size == 0)
+	if (array == NULL)
 		return (-1);
-
-	step = sqrt(size);
-
-	for (i = jmp = 0; jmp < size && array[jmp] < value;)
+	printf("Value checked array[%lu] = [%d]\n", prev, array[prev]);
+	while (array[min(step, size) - 1] < value)
 	{
-		printf("Value checked array [%ld] = [%d]\n", jmp, array[jmp]);
-		i = jmp;
-		jmp += step;
+		prev = step;
+		step += sqrt(size);
+		if (prev >= size)
+			return (-1);
+		printf("Value checked array[%lu] = [%d]\n", prev, array[prev]);
+	}
+	while (array[prev] < value)
+	{
+		prev++;
+		if (prev == min(step, size))
+			return (-1);
+		printf("Value checked array[%lu] = [%d]\n", prev, array[prev]);
+	}
+	if (array[prev] == value)
+	{
+		printf("Value checked array[%lu] = [%d]\n", prev, array[prev]);
+		return (prev);
 	}
 
-	printf("Value found between indexes [%ld] and [%ld]\n", i, jmp);
-
-	jmp = jmp > size - 1 ? jmp : size - 1;
-	for (; i < jmp && array[i] < value; i++)
-		printf("Value checked array [%ld] = [%d]\n", i, array[i]);
-	printf("Value checked array [%ld] = [%d]\n", i, array[i]);
-
-	return (array[i] == value ? (int)i : -1);
+	return (-1);
 }
